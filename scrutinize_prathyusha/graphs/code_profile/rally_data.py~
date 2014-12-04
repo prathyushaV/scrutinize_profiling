@@ -1,0 +1,5 @@
+#! /usr/bin/python
+import mysql_interface
+def get_data(task_id):
+    msi = mysql_interface.MySQLInterface("localhost","rally","root", "openstack")
+    print msi.get_rows("task_results",task_id)

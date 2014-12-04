@@ -1,0 +1,54 @@
+
+        <html>
+        <head>
+            <!--  Stylesheets --!>
+            <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/static/css/style1.css" />
+            <style>
+                .green{
+                   color: green;
+                }
+                .red{
+                   color: red;
+                }
+                .orange{
+                    color: orange;
+                }
+                code.prettyprint>div{
+                    margin-left:20px;
+                    margin-right:20px;
+                    padding-left: 30px;
+                    background-color: #F0F0D0;
+                }
+                code.prettyprint>div:first-child{
+                    padding-top:20px;
+                }
+                code>div.default{
+                    color: #101010;
+                }
+                code>div.red:hover{
+                    border: 0.5px solid #C0C0C0;
+                }
+                code>div.green:hover{
+                   border: 0.5px solid #C0C0C0;
+                }
+		code>div.orange:hover{
+                   border: 0.5px solid #C0C0C0;
+                }
+            </style>
+            <!-- Scripts --!>
+            <script src="/static/js/jquery.min.js"></script>
+            <script src="/static/js/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $('div').tooltip();
+                });
+            </script>
+        </head>
+        <body>
+            <ul class="nav nav-tabs custom-nav" role="tablist">
+                <li class="custom-li"><a href="scrutinize">Profiling Report</a></li>
+                <li class="active"><a href="code_coverage">Code Coverage</a></li>
+		<li><a href="rally">Rally Graph</a></li>
+            </ul>
+<code class='prettyprint'><div class='default'>diff --git a/nova/api/openstack/wsgi.py b/nova/api/openstack/wsgi.py</div><div class='default'>index 385cf52..b897d58 100644</div><div class='default'>--- a/nova/api/openstack/wsgi.py</div><div class='default'>+++ b/nova/api/openstack/wsgi.py</div><div class='default'>@@ -17,0 +18 @@</div><div class='orange'>+import json</div><div class='default'>@@ -905,0 +907,6 @@ def __call__(self, request):</div><div class='red'>+        ###Added by Bharath</div><div class='green'>+        action_args_null = self.get_action_args(request.environ)</div><div class='green'>+        action_empty = action_args_null.pop('action', None)</div><div class='green'>+        content_type, body = self.get_body(request)</div><div class='green'>+        accept_null = request.best_match_content_type()</div><div class='red'>+</div><div class='default'>@@ -923,0 +931,5 @@ def _process_stack(self, request, action, action_args,</div><div class='green'>+        nova_value = 1</div><div class='green'>+        if nova_value == 2:</div><div class='red'>+            LOG.debug("nova boot is 2")</div><div class='green'>+        elif nova_value == 1:</div><div class='green'>+            LOG.debug("nova boot is 1")</div>

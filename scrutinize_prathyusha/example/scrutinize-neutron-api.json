@@ -1,0 +1,41 @@
+{
+    "notifiers" : {
+        "statsd": {
+            "code": "scrutinize.notifiers:Statsd",
+            "config": {
+                "host": "127.0.0.1",
+                "port": 8125
+            }
+        }
+    },
+
+    "label_extractors" : {
+        "ArgExtract" : {"code": "scrutinize.label_extractors_neutron_api:ArgExtract",
+                       "position": 0,
+                       "prefix": "arg_"}
+    },
+
+    "collectors" : {
+        "profile": {
+            "code": "scrutinize.collectors:Profile",
+            "config": {}
+        },
+        "time": {
+            "code": "scrutinize.collectors:Time",
+            "config": {}
+        }
+    },
+
+    "Neutron" : {
+        "target": "neutron.api.v2.base:Controller.create",
+        "collector": "time",
+        "label_extractor": "ArgExtract",
+        "notifiers": ["statsd"]
+    },
+    "Neutron" : {
+        "target": "neutron.api.v2.base:Controller.create",
+        "collector": "profile",
+        "label_extractor": "ArgExtract",
+        "notifiers": ["statsd"]
+    }
+}

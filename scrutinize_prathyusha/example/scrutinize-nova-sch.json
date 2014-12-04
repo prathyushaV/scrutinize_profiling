@@ -1,0 +1,42 @@
+{
+    "notifiers" : {
+        "statsd": {
+            "code": "scrutinize.notifiers:Statsd",
+            "config": {
+                "host": "127.0.0.1",
+                "port": 8125
+            }
+        }
+    },
+
+    "label_extractors" : {
+        "ArgExtract" : {"code": "scrutinize.label_extractors_cpu:ArgExtract",
+                       "position": 2,
+                       "prefix": "arg_"}
+    },
+
+    "collectors" : {
+        "profile": {
+            "code": "scrutinize.collectors:Profile",
+            "config": {}
+        },
+        "time": {
+            "code": "scrutinize.collectors:Time",
+            "config": {}
+        }
+    },
+
+    "Nova_scheduler_profile" : {
+        "target": "oslo.messaging.rpc.dispatcher:RPCDispatcher._do_dispatch",
+        "collector": "profile",
+        "label_extractor": "ArgExtract",
+        "notifiers": ["statsd"]
+    },
+
+    "Nova_scheduler_time" : {
+        "target": "oslo.messaging.rpc.dispatcher:RPCDispatcher._do_dispatch",
+        "collector": "time",
+        "label_extractor": "ArgExtract",
+        "notifiers": ["statsd"]
+    }
+}

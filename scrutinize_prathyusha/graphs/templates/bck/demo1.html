@@ -1,0 +1,48 @@
+
+        <html>
+        <head>
+            <!--  Stylesheets --!>
+            <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/static/css/style1.css" />
+            <style>
+                .green{
+                   color: green;
+                }
+                .red{
+                   color: red;
+                }
+                code.prettyprint>div{
+                    margin-left:20px;
+                    margin-right:20px;
+                    padding-left: 30px;
+                    background-color: #F0F0D0;
+                }
+                code.prettyprint>div:first-child{
+                    padding-top:20px;
+                }
+                code>div.default{
+                    color: #101010;
+                }
+                code>div.red:hover{
+                    border: 0.5px solid #C0C0C0;
+                }
+                code>div.green:hover{
+                   border: 0.5px solid #C0C0C0;
+                }
+            </style>
+            <!-- Scripts --!>
+            <script src="/static/jquery.min.js"></script>
+            <script src="/static/bootstrap.min.js"></script>
+            <script>
+                $(document).ready(function(){
+                    $('div').tooltip();
+                });
+            </script>
+        </head>
+        <body>
+            <ul class="nav nav-tabs custom-nav" role="tablist">
+                <li class="custom-li"><a href="/test/">Profiling Report</a></li>
+                <li class="active"><a href="./demo1.html">Code Coverage</a></li>
+                <li class="custom-li"><a href="./rally.html">Rally Graph</a></li>
+            </ul>
+<code class='prettyprint'><div class='default'>diff --git a/nova/api/openstack/compute/__init__.py b/nova/api/openstack/compute/__init__.py</div><div class='default'>index bca184c..78972f7 100644</div><div class='default'>--- a/nova/api/openstack/compute/__init__.py</div><div class='default'>+++ b/nova/api/openstack/compute/__init__.py</div><div class='default'>@@ -35,0 +36,2 @@</div><div class='default'>+from nova.api.openstack.compute import cmss</div><div class='default'>+</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -128,0 +131,8 @@ def _setup_routes(self, mapper, ext_mgr, init_only):</div><div class='default'>+        </div><div class='default'>+        #added prathyusha</div><div class='default'>+        if init_only is None or 'cmss' in init_only:</div><div class='default'>+            self.resources['cmss'] = cmss.create_resource()</div><div class='default'>+            mapper.resource("cms", "cmss",</div><div class='default'>+                            controller=self.resources['cmss'],</div><div class='default'>+                            collection={'detail': 'GET'},</div><div class='default'>+                            member={'action': 'POST'})</div><div class='default'>diff --git a/nova/api/openstack/compute/views/flavors.py b/nova/api/openstack/compute/views/flavors.py</div><div class='default'>index 1e4ce0b..9a53786 100644</div><div class='default'>--- a/nova/api/openstack/compute/views/flavors.py</div><div class='default'>+++ b/nova/api/openstack/compute/views/flavors.py</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -50,0 +51 @@ def index(self, request, flavors):</div><div class='default'>+        #import pdb;pdb.set_trace()</div><div class='default'>diff --git a/nova/compute/api.py b/nova/compute/api.py</div><div class='default'>index d013184..cc905aa 100644</div><div class='default'>--- a/nova/compute/api.py</div><div class='default'>+++ b/nova/compute/api.py</div><div class='default'>@@ -77,0 +78,3 @@</div><div class='default'>+## Added by Anirudh.</div><div class='default'>+from nova import cms_plugin</div><div class='default'>+</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -256,0 +260 @@ def __init__(self, image_service=None, network_api=None, volume_api=None,</div><div class='default'>+        self._cms_plugin_api = cms_plugin.API()</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -998,0 +1003,3 @@ def _create_instance(self, context, instance_type,</div><div class='default'>+        #NOTE(anirudh): Added for CMS_PLUGIN support with openstack nova</div><div class='default'>+        self._cms_plugin_api.push_instance_data(context, instances=instances)</div><div class='default'>+</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -1697,0 +1705,4 @@ def _delete_instance(self, context, instance):</div><div class='default'>+        </div><div class='default'>+        #NOTE(anirudh): Added to support CMS plugin.</div><div class='default'>+        self._cms_plugin_api.remove_instance(context, instance)</div><div class='default'>+          </div><div class='default'>diff --git a/nova/compute/manager.py b/nova/compute/manager.py</div><div class='default'>index 32ab334..b78cbbb 100644</div><div class='default'>--- a/nova/compute/manager.py</div><div class='default'>+++ b/nova/compute/manager.py</div><div class='default'>@@ -92,0 +93,2 @@</div><div class='default'>+## Added by Anirudh.</div><div class='default'>+from nova import cms_plugin</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -589,0 +592,2 @@ def __init__(self, compute_driver=None, *args, **kwargs):</div><div class='default'>+        #NOTE(anirudh): Added to support CMS plugin.</div><div class='default'>+        self._cms_plugin_api = cms_plugin.API()</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -1747,0 +1752,4 @@ def _spawn(self, context, instance, image_meta, network_info,</div><div class='default'>+</div><div class='default'>+        #NOTE(anirudh): Added for CMS_PLUGIN support with openstack nova</div><div class='default'>+        self._cms_plugin_api.push_instance_data(context, instances=[instance])</div><div class='default'>+</div><div class='red' data-toggle='tooltip' data-placement='top' title='Functions that are not invoked'>@@ -1977,0 +1986,4 @@ def _build_and_run_instance(self, context, instance, image, injected_files,</div><div class='default'>+</div><div class='default'>+        #NOTE(anirudh): Added for CMS_PLUGIN support with openstack nova</div><div class='default'>+        self._cms_plugin_api.push_instance_data(context, instances=[instance])</div><div class='default'>+</div><div class='default'>diff --git a/requirements.txt b/requirements.txt</div><div class='default'>index 5c02ff1..c3442cb 100644</div><div class='default'>--- a/requirements.txt</div><div class='default'>+++ b/requirements.txt</div><div class='default'>@@ -1,35 +1,3 @@</div><div class='default'>-pbr>=0.6,<1.0</div><div class='default'>-SQLAlchemy>=0.7.8,!=0.9.5,<=0.9.99</div><div class='default'>-amqplib>=0.6.1</div><div class='default'>-anyjson>=0.3.3</div><div class='default'>-argparse</div><div class='default'>-boto>=2.12.0,!=2.13.0</div><div class='default'>-eventlet>=0.13.0</div><div class='default'>-Jinja2</div><div class='default'>-kombu>=2.4.8</div><div class='default'>-lxml>=2.3</div><div class='default'>-Routes>=1.12.3,!=2.0</div><div class='default'>-WebOb>=1.2.3</div><div class='default'>-greenlet>=0.3.2</div><div class='default'>-PasteDeploy>=1.5.0</div><div class='default'>-Paste</div><div class='default'>-sqlalchemy-migrate>=0.8.2,!=0.8.4</div><div class='default'>-netaddr>=0.7.6</div><div class='default'>-suds>=0.4</div><div class='default'>-paramiko>=1.9.0</div><div class='default'>-pyasn1</div><div class='default'>-Babel>=1.3</div><div class='default'>-iso8601>=0.1.9</div><div class='default'>-jsonschema>=2.0.0,<3.0.0</div><div class='default'>-python-cinderclient>=1.0.6</div><div class='default'>-python-neutronclient>=2.3.4,<3</div><div class='default'>-python-glanceclient>=0.9.0</div><div class='default'>-python-keystoneclient>=0.7.0</div><div class='default'>-six>=1.6.0</div><div class='default'>-stevedore>=0.14</div><div class='default'>-websockify>=0.5.1,<0.6</div><div class='default'>-wsgiref>=0.1.2</div><div class='default'>-oslo.config>=1.2.0</div><div class='default'>-oslo.rootwrap</div><div class='default'>-pycadf>=0.4.1</div><div class='default'>-oslo.messaging>=1.3.0</div><div class='default'>+pbr>=0.6,!=0.7,<1.0</div><div class='default'>+SQLAlchemy>=0.8.4,<=0.8.99,>=0.9.7,<=0.9.99</div><div class='default'>+amqplib</div></code></body></html

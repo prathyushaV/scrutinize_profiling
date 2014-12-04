@@ -1,0 +1,59 @@
+<html>
+<head>
+<script type= "script/javascript"></script>
+<script></script>
+
+</head>
+<style>
+
+svg {
+  font: 10px sans-serif;
+}
+
+.area {
+  fill: steelblue;
+  clip-path: url(#clip);
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.brush .extent {
+  stroke: #fff;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+            <ul class="nav nav-tabs custom-nav" role="tablist">
+                <li class="custom-li"><a href="scrutinize">Profiling Report</a></li>
+                <li class="custom-li"><a href="code_coverage">Code Coverage</a></li>
+                <li class="active"><a href="rally">Rally Graph</a></li>
+            </ul>
+	    <div class="rallychart">
+       <p class="rally"></p>
+   </div> 
+   <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<!--  Stylesheets -->
+
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/css/style1.css" />
+<!-- Scripts -->
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/d3.v3.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/d3.tip.v0.6.3.js"></script> 
+    <script src="/static/js/highcharts.js"></script>
+    <script src="/static/js/highcharts-3d.js"></script>
+    <script src="/static/js/themes/dark-unica.js"></script>
+    <script src="/static/js/rally_graph2.js"></script>
+
+</body>
+
+</html>

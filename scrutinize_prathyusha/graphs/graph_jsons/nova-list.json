@@ -1,0 +1,7 @@
+{"scenario" : [{
+       "entry_points" : "['detail']",
+       "name" : "nova_list",
+       "count" : 5
+	}
+	]
+}

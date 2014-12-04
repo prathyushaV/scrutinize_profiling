@@ -1,0 +1,33 @@
+{
+    "notifiers" : {
+        "statsd": {
+            "code": "scrutinize.notifiers:Statsd",
+            "config": {
+                "host": "127.0.0.1",
+                "port": 8125
+            }
+        }
+    },
+
+    "label_extractors" : {
+        "nova_rpc" : { "code": "scrutinize.label_extractors:ArgExtract", 
+                       "config": { "position": 0,
+                                   "prefix": "arg_"}
+        }
+    },
+
+    "collectors" : {
+        "profile": {
+            "code": "scrutinize.collectors:Profile",
+            "config": {}
+        }
+    },
+    "Nova_API_profile" : {
+        "target": "nova.api.openstack.wsgi:Resource._process_stack",
+        "collector": "profile",
+        "label_extractor": "nova_rpc",
+        "notifiers": ["statsd"]
+    },
+
+   "git_repo" : "/opt/stack/new/nova"
+}

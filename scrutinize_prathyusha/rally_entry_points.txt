@@ -1,0 +1,89 @@
+(<nova.api.openstack.wsgi.Resource object at 0x5a78290>, <Request at 0x709ecd0 GET http://10.138.89.33:8774/v2/2878be97d5944ac39aca49826a843044/images/af251207-d86a-49a3-afb3-b1f7513aa926>, u'show', {'project_id': u'2878be97d5944ac39aca49826a843044', 'id': u'af251207-d86a-49a3-afb3-b1f7513aa926'}, None, '', 'application/json')
+
+
+(<nova.api.openstack.wsgi.Resource object at 0x5a7fd10>, <Request at 0x79b0ed0 GET http://10.138.89.33:8774/v2/2878be97d5944ac39aca49826a843044/flavors/1>, u'show', {'project_id': u'2878be97d5944ac39aca49826a843044', 'id': u'1'}, None, '', 'application/json')
+
+(<nova.api.openstack.wsgi.Resource object at 0x5a71690>, <Request at 0x89f9d10 POST http://10.138.89.33:8774/v2/2878be97d5944ac39aca49826a843044/servers>, u'create', {'project_id': u'2878be97d5944ac39aca49826a843044'}, 'application/json', '{"server": {"min_count": 1, "flavorRef": "1", "name": "vm", "imageRef": "af251207-d86a-49a3-afb3-b1f7513aa926", "max_count": 1}}', 'application/json')
+
+
+(<nova.api.openstack.wsgi.Resource object at 0x5a71690>, <Request at 0x709ecd0 GET http://10.138.89.33:8774/v2/2878be97d5944ac39aca49826a843044/servers/23486108-108b-45ac-ae63-cadc06431ee7>, u'show', {'project_id': u'2878be97d5944ac39aca49826a843044', 'id': u'23486108-108b-45ac-ae63-cadc06431ee7'}, None, '', 'application/json')
+
+
+(<nova.api.openstack.wsgi.Resource object at 0x5a7fd10>, <Request at 0x8a1c850 GET http://10.138.89.33:8774/v2/2878be97d5944ac39aca49826a843044/flavors/1>, u'show', {'project_id': u'2878be97d5944ac39aca49826a843044', 'id': u'1'}, None, '', 'application/json')
+
+
+print args[3]['id']
+
+(<nova.api.openstack.wsgi.Resource object at 0x60a9650>, <Request at 0x922ef50 POST http://10.138.89.33:8774/v2/2878be97d5944ac39aca49826a843044/servers>, u'create', {'body': {u'server': {u'name': u'vm', u'imageRef': u'af251207-d86a-49a3-afb3-b1f7513aa926', u'flavorRef': u'1', u'max_count': 1, u'min_count': 1, 'scheduler_hints': {}}}}, 'application/json', '{"server": {"min_count": 1, "flavorRef": "1", "name": "vm", "imageRef": "af251207-d86a-49a3-afb3-b1f7513aa926", "max_count": 1}}', 'application/json')
+
+eval(args[1].body)['server']['name']
+
+Resize Server:
+
+confirm_resize#10:58:54.466529.prof            resize_instance#11:00:09.097076.prof
+confirm_resize#10:59:37.440859.prof            run_instance#10:58:23.165501.prof
+confirm_resize#11:00:24.577088.prof            run_instance#10:59:10.111256.prof
+finish_resize#10:58:36.547973.prof             run_instance#10:59:57.278713.prof
+finish_resize#10:59:23.785122.prof             servers-action#10:58:30.706510.prof
+finish_resize#11:00:13.650925.prof             servers-action#10:58:53.413358.prof
+flavors-detail#10:58:17.432749.prof            servers-action#10:59:19.750882.prof
+flavors-detail#10:58:21.254614.prof            servers-action#10:59:37.021405.prof
+flavors-detail#10:58:21.350322.prof            servers-action#11:00:06.180169.prof
+flavors-show#10:58:17.547807.prof              servers-action#11:00:24.149677.prof
+flavors-show#10:58:29.879338.prof              servers-createrally_novaserver_elmmoapvxqxymjna#10:59:55.185669.prof
+images-show#10:58:29.991868.prof               servers-createrally_novaserver_jwimlnnewrufegka#10:58:21.649690.prof
+os-floating-ips-index#10:58:38.240203.prof     servers-createrally_novaserver_wnawgweluhdqcgjt#10:59:08.135859.prof
+os-keypairs-index#11:00:31.763325.prof         servers-delete#10:58:59.430821.prof
+os-keypairs-index#11:00:31.829584.prof         servers-delete#10:59:49.230507.prof
+os-security-groups-index#11:00:31.885760.prof  servers-delete#11:00:27.383448.prof
+os-services-index#10:58:19.853640.prof         servers-detail#10:58:29.599147.prof
+os-services-index#11:00:33.123375.prof         servers-detail#11:00:31.359554.prof
+prep_resize#10:58:31.840135.prof               servers-detail#11:00:31.560402.prof
+prep_resize#10:59:20.537445.prof               terminate_instance#10:59:00.795766.prof
+prep_resize#11:00:07.931756.prof               terminate_instance#10:59:50.015043.prof
+resize_instance#10:58:32.343644.prof           terminate_instance#11:00:28.354802.prof
+resize_instance#10:59:20.988479.prof
+
+
+
+snap-shot
+
+flavors-detail#11:11:04.763579.prof            os-services-index#11:11:05.932652.prof
+flavors-detail#11:11:07.511165.prof            os-services-index#11:12:30.996082.prof
+flavors-show#11:11:04.887983.prof              run_instance#11:11:10.071292.prof
+images-delete#11:12:27.947195.prof             run_instance#11:12:19.552501.prof
+images-show#11:11:18.571924.prof               servers-action#11:11:16.399440.prof
+images-show#11:11:29.058281.prof               servers-createrally_novaserver_jpxlwmtfuhovaihz#11:11:07.948776.prof
+images-show#11:11:32.045443.prof               servers-createrally_novaserver_jpxlwmtfuhovaihz#11:11:43.612998.prof
+images-show#11:11:34.224578.prof               servers-delete#11:11:40.462553.prof
+images-show#11:11:36.717273.prof               servers-delete#11:12:24.574965.prof
+images-show#11:11:39.292884.prof               servers-detail#11:12:29.291331.prof
+images-show#11:12:28.587152.prof               servers-detail#11:12:29.441272.prof
+os-keypairs-index#11:12:29.578062.prof         snapshot_instance#11:11:18.156441.prof
+os-keypairs-index#11:12:29.651237.prof         terminate_instance#11:11:41.108926.prof
+os-security-groups-index#11:12:29.714323.prof  terminate_instance#11:12:25.447354.prof
+
+bounce_server
+
+flavors-detail#11:16:33.499732.prof            servers-action#11:16:43.285924.prof
+flavors-detail#11:16:36.353036.prof            servers-action#11:16:48.306092.prof
+flavors-show#11:16:33.598293.prof              servers-action#11:18:54.385451.prof
+flavors-show#11:18:30.384401.prof              servers-action#11:18:57.398899.prof
+images-show#11:18:30.471958.prof               servers-action#11:19:00.815940.prof
+     servers-action#11:19:05.971285.prof
+    servers-createrally_novaserver_vabfpuabbtrvpjpc#11:16:36.695515.prof
+     servers-delete#11:19:08.705754.prof
+     servers-detail#11:18:30.066962.prof
+         servers-detail#11:19:12.347029.prof
+         servers-detail#11:19:12.546937.prof
+  servers-detail#11:28:29.876671.prof
+        servers-detail#11:38:29.933746.prof
+         servers-detail#11:48:30.037037.prof
+reboot_instance#11:16:43.728264.prof           start_instance#11:18:57.861194.prof
+reboot_instance#11:16:48.740434.prof           stop_instance#11:18:54.837751.prof
+rescue_instance#11:19:01.294787.prof           terminate_instance#11:19:09.339229.prof
+run_instance#11:16:38.103644.prof              unrescue_instance#11:19:06.395815.prof
+
+
+
+

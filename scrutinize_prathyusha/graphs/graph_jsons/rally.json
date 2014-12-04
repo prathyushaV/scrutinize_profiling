@@ -1,0 +1,24 @@
+{"scenario" : [{
+       "entry_points" : "['flavors-detail','external_instance_event','servers-show','terminate_instance','run_instance','servers-create','network','port','run_instance','flavors-detail','subnet']",
+       "name" : "nova_boot_delete",
+       "count" : 1
+        },
+	{
+       "entry_points" : "['flavors-detail','confirm_resize','resize_instance','run_instance','finish_resize','servers-action','servers-create','prep_resize','resize_instance',' servers-delete','terminate_instance']",
+       "name" : "nova_resize_server",
+       "count" : 1
+        },
+	{
+       "entry_points" : "['flavors-detail','servers-action','servers-delete','terminate_instance','start_instance','stop_instance','run_instance','reboot_instance','servers-create','rescue_instance','unrescue_instance','reboot_instance']",
+       "name" : "bounce_server",
+       "count" : 1
+        },
+        {
+       "entry_points" : "['flavors-detail','images-delete','servers-delete','terminate_instance','run_instance','servers-create','snapshot_instance']",
+       "name" : "snap_shot",
+       "count" : 1
+        }
+
+
+        ]
+}

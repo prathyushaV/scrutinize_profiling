@@ -1,0 +1,17 @@
+import httplib
+
+def send_request():
+    httpServ = httplib.HTTPConnection("127.0.0.1", 8989)
+    httpServ.connect()
+
+    httpServ.request('GET', '/')
+    response = httpServ.getresponse()
+
+    httpServ.request('GET', '/rally.html')
+    response = httpServ.getresponse()
+
+    for i in range(1,2):
+	httpServ.request('GET', '/req/req_'+str(i))
+	response = httpServ.getresponse()		
+
+send_request()

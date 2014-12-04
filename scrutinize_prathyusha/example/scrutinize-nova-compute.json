@@ -1,0 +1,33 @@
+{
+    "notifiers" : {
+        "statsd": {
+            "code": "scrutinize.notifiers:Statsd",
+            "config": {
+                "host": "127.0.0.1",
+                "port": 8125
+            }
+        }
+    },
+
+    "label_extractors" : {
+        "ArgExtract" : {"code": "scrutinize.label_extractors_cpu:ArgExtract",
+                       "position": 2,
+                       "prefix": "arg_"}
+    },
+
+    "collectors" : {
+        "profile": {
+            "code": "scrutinize.collectors:Profile",
+            "config": {}
+        }
+    },
+
+    "Nova_compute_profile" : {
+        "target": "oslo.messaging.rpc.dispatcher:RPCDispatcher._do_dispatch",
+        "collector": "profile",
+        "label_extractor": "ArgExtract",
+        "notifiers": ["statsd"]
+    },
+
+    "git_repo" : "/opt/stack/new/nova"
+}

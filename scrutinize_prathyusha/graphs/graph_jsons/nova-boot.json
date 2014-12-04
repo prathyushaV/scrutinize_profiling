@@ -1,0 +1,7 @@
+{"scenario" : [{
+       "entry_points" : "['show','show','create','show','show','port','show','external_instance_event','create','run_instance']",
+       "name" : "nova_boot",
+       "count" : 5
+        }
+        ]
+}

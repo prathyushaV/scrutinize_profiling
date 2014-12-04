@@ -1,0 +1,3 @@
+{
+       "entry_points" : "['show','show','create','show','show','port','show','external_instance_event','create','run_instance','delete','show','terminate_instance']"
+}

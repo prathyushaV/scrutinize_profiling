@@ -1,0 +1,7 @@
+{"scenario" : [{
+       "entry_points" : "['external_instance_event','servers-show','terminate_instance','run_instance','run_instance','servers-create','network','port','flavors-detail','subnet']",
+       "name" : "nova_boot_delete",
+       "count" : 5
+        }
+        ]
+}
